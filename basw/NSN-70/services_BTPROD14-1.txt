@@ -1,0 +1,3 @@
+#TYPE Selected.System.ServiceProcess.ServiceController
+"ServiceName","DisplayName","Status","StartType","RequiredServices"
+"JSCAPE MFT Server","JSCAPE MFT Server","Running","Automatic","System.ServiceProcess.ServiceController[]"

@@ -1,0 +1,5 @@
+#TYPE Selected.System.ServiceProcess.ServiceController
+"ServiceName","DisplayName","Status","StartType","RequiredServices"
+"BasWare BTS","BasWare BTS","Stopped","Disabled","System.ServiceProcess.ServiceController[]"
+"BTAutoAdmin","BTAutoAdmin","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"BTMailFetcher","BTMailFetcher","Stopped","Disabled","System.ServiceProcess.ServiceController[]"

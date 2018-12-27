@@ -1,0 +1,3 @@
+#TYPE Selected.System.ServiceProcess.ServiceController
+"ServiceName","DisplayName","Status","StartType","RequiredServices"
+"Apache2.4","Apache2.4","Running","Automatic","System.ServiceProcess.ServiceController[]"

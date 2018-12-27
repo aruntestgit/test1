@@ -1,0 +1,6 @@
+#TYPE Selected.System.ServiceProcess.ServiceController
+"ServiceName","DisplayName","Status","StartType","RequiredServices"
+"Apache2.4","Apache2.4","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"BT-ICS-Consumer-Service","BT-ICS-Consumer-Service","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"BTOnpMediator","BTOnpMediator","Stopped","Disabled","System.ServiceProcess.ServiceController[]"
+"Tomcat8","Apache Tomcat 8.0 Tomcat8","Running","Automatic","System.ServiceProcess.ServiceController[]"

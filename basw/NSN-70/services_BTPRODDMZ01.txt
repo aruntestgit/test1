@@ -1,0 +1,6 @@
+#TYPE Selected.System.ServiceProcess.ServiceController
+"ServiceName","DisplayName","Status","StartType","RequiredServices"
+"BasWare BTS","BasWare BTS","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"BT FUSE","BT FUSE","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"BT-Siemens-Service","BT-Siemens-Service","Running","Automatic","System.ServiceProcess.ServiceController[]"
+"SolidDB 6.5 (Basware)","SolidDB 6.5 (Basware)","Stopped","Manual","System.ServiceProcess.ServiceController[]"
