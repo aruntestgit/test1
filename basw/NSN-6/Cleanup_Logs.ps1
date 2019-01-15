@@ -2,7 +2,7 @@
 ---------------------------------------
 Synopsis: Disk space cleanup script.
 Author: Arun Dhiman
-Version: 1.0
+Version: 1.1
 Date Modified: December 17, 2018
 ---------------------------------------
 #>
@@ -20,28 +20,25 @@ $dDateString = [string](get-date)
 $sHostname = $env:COMPUTERNAME
 $sFailureMessage = "Cleanup_FAIL"
 $sSuccessMessage = "Cleanup_SUCCESS"
-# Create "C:\DoNotDelete" folder for log files
-if (!(Test-Path $sLogFolder)) {
-	try {
-		Write-Output "`nTRY create folder $sLogFolder"
-		&cmd /c "mkdir $sLogFolder"  > $null
-		Write-Output "SUCCESS create folder $sLogFolder"
-	} catch {
-		$sErrorMessage = $_.Exception.Message
-		$sFailedItem = $_.Exception.ItemName
-		Write-Output "`$sErrorMessage = $sErrorMessage"
-		Write-Output "`$sFailedItem = $sFailedItem"
-		Write-Output "FAIL create folder $sLogFolder"
-		Return $true
-	}
-} else {
-	Write-Output "Exist $sLogFolder"
-}
 $sCleanupLogs = Join-Path $sLogFolder "CleanupLogs.log"
 $sCleanupSplunkLogs = Join-Path $sLogFolder "CleanupSplunkLogs.log"
 
 # start logging everything comes on screen
 Start-Transcript -Path $sCleanupLogs -Append -Force
+
+# check dive free sapce. Abort task if drive space is less than 2GB.
+$aDiskDrives = Get-WmiObject Win32_LogicalDisk -ComputerName . -Filter "DriveType=3" | Select-Object  DeviceID,size,freespace
+foreach ($oDrive in $aDiskDrives) {
+	$sDriveName = $oDrive.DeviceID
+	$iDriveFreeSpace = [Math]::Round($oDrive.FreeSpace/1GB, 2)
+	if ($iDriveFreeSpace -lt "2") {
+		Write-Output "Task cannot perform on drive space less than 2GB.`nTotal space available in $sDriveName is $iDriveFreeSpace GB."
+		Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; Total files cleaned = 0" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
+		break;
+	} else {
+		# proceed further
+	}
+}
 
 Function Start-ZipFiles {
 	
@@ -119,8 +116,6 @@ Function Start-ZipFiles {
 			    }
 			} else {
 				Write-Output "No file(s) found for cleanup at $sPath"
-				#Write-Output "$dDateString ServerName = $Hostname; Message = $SuccessMessage; TotalFilesCleaned = $($TotalLogFilesZipped.count);" | Tee-Object -FilePath $sCleanupSplunkLogs -Append
-				#Return $true > $null
 			}
 
 			if ($bProceed -eq $true) {
@@ -137,7 +132,7 @@ Function Start-ZipFiles {
 					Write-Output "`$sErrorMessage = $sErrorMessage"
 					Write-Output "`$sFailedItem = $sFailedItem"
 					Write-Output "FAIL zip"
-					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
+					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count)" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 					Return $true
 				}
 
@@ -152,18 +147,18 @@ Function Start-ZipFiles {
 					Write-Output "`$sErrorMessage = $sErrorMessage"
 					Write-Output "`$sFailedItem = $sFailedItem"
 					Write-Output "FAIL remove $sLogArchivePath"
-					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; Total files cleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
+					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; Total files cleaned = $($aTotalLogFilesZipped.count)" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 					Return $true
 				}
 			} else {
-				# Do Nothing
+				# Proceed further
 			}
 	    } else {
 			Write-Output "Does Not Exist $sPath"
 		}
 	}
 	
-	Write-Output "$dDateString; ServerName = $sHostname; Message = $sSuccessMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
+	Write-Output "$dDateString; ServerName = $sHostname; Message = $sSuccessMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count)" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 }
 
 
