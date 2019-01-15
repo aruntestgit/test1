@@ -137,7 +137,7 @@ Function Start-ZipFiles {
 					Write-Output "`$sErrorMessage = $sErrorMessage"
 					Write-Output "`$sFailedItem = $sFailedItem"
 					Write-Output "FAIL zip"
-					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -FilePath $sCleanupSplunkLogs -Append
+					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 					Return $true
 				}
 
@@ -152,7 +152,7 @@ Function Start-ZipFiles {
 					Write-Output "`$sErrorMessage = $sErrorMessage"
 					Write-Output "`$sFailedItem = $sFailedItem"
 					Write-Output "FAIL remove $sLogArchivePath"
-					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; Total files cleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -FilePath $sCleanupSplunkLogs -Append
+					Write-Output "$dDateString ServerName = $sHostname; Message = $sFailureMessage; Total files cleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 					Return $true
 				}
 			} else {
@@ -163,7 +163,7 @@ Function Start-ZipFiles {
 		}
 	}
 	
-	Write-Output "$dDateString; ServerName = $sHostname; Message = $sSuccessMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -FilePath $sCleanupSplunkLogs -Append
+	Write-Output "$dDateString; ServerName = $sHostname; Message = $sSuccessMessage; TotalFilesCleaned = $($aTotalLogFilesZipped.count);" | Tee-Object -Variable OutLog | Out-File $sCleanupSplunkLogs -Encoding utf8 -Append
 }
 
 
