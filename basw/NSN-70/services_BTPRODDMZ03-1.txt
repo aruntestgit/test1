@@ -1,3 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"BTCorePush","BTCorePush","Running","Automatic","System.ServiceProcess.ServiceController[]"

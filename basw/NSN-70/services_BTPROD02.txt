@@ -1,6 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"Apache2.4","Apache2.4","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"BTMailFetcher","BTMailFetcher","Stopped","Disabled","System.ServiceProcess.ServiceController[]"
-"Tomcat5","Apache Tomcat 5.5 Tomcat5","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"Tomcat8","Apache Tomcat 8.0 Tomcat8","Stopped","Disabled","System.ServiceProcess.ServiceController[]"
