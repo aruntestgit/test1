@@ -1,6 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"BT Archiver","BT Archiver","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"BT CleanUpTool","BT CleanUpTool","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"BTCore","BTCore","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"BT-ICS-Connector-Service","BT-ICS-Connector-Service","Running","Automatic","System.ServiceProcess.ServiceController[]"

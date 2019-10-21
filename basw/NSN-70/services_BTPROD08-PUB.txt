@@ -1,4 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"Basware anyERP Adapter 5.6 (default)","Basware anyERP Adapter 5.6 (default)","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"IFaceServiceV51","Basware IFace Service 5.1.2 ","Running","Automatic","System.ServiceProcess.ServiceController[]"

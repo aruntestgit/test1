@@ -1,4 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"BasWare BTS","BasWare BTS","Running","Automatic","System.ServiceProcess.ServiceController[]"
-"solidDB 100 (Basware)","solidDB 100 (Basware)","Running","Automatic","System.ServiceProcess.ServiceController[]"

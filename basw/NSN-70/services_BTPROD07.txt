@@ -1,3 +1,0 @@
-#TYPE Selected.System.ServiceProcess.ServiceController
-"ServiceName","DisplayName","Status","StartType","RequiredServices"
-"BTOnpMediator","BTOnpMediator","Running","Automatic","System.ServiceProcess.ServiceController[]"
